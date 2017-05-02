@@ -1,36 +1,74 @@
-<!DOCTYPE>
+<!DOCTYPE html>
 <html>
   <head>
-    <meta charset="UTF-8">
-    <title>Live Plot</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Live Plot Service</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js"></script>
+    <script src="http://code.highcharts.com/highcharts.js"></script>
+    <script src="http://code.highcharts.com/highcharts-more.js"></script>
+    <script src="http://code.highcharts.com/modules/exporting.js"></script>
   </head>
   <body>
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="/">Live Plot</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+      </div>
+    </div>
+
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron">
+      <div class="container-fluid">
+        <br/>
+        <p>Live data plotting using Flask and Highcharts.</p>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+      <!-- Example row of columns -->
+      <div class="row">
+
+          <div class="container-fluid" id="data-container"></div>
+
+        </div>
+    </div>
+    <hr>
+      <footer>
+        <p>2017</p>
+      </footer>
+    </div> <!-- /container -->
+
+    <!--<script src="/static/js/highcharts.js"></script>-->
     <script type="text/javascript">
-      $(document).ready(function(){
-        var sock = io.connect('http://13.78.90.3:80');
-        sock.on('connect', function(){
-          var connect_string = 'new_connect';
-          sock.send(connect_string);
+        $(document).ready(function(){
+          var sock = io.connect('http://13.78.90.3:80');
+          sock.on('connect', function(){
+            var connect_string = 'new_connect';
+            sock.send(connect_string);
+          });
+          sock.on('draw', function(msg){
+            console.log(msg);
+          });
+          $('#changeButton').on('click', function(){
+            if($('#changeButton').html() == 'start'){
+              $('#changeButton').html('stop');
+              sock.emit('change mode', {'mode': 'start'});
+            }
+            else{
+              $('#changeButton').html('start');
+              sock.emit('change mode', {'mode': 'stop'});
+            }
+          });
         });
-
-        sock.on('draw', function(msg){
-          console.log(msg);
-        });
-
-        $('#changeButton').on('click', function(){
-          if($('#changeButton').html() == 'start'){
-            $('#changeButton').html('stop');
-            sock.emit('change mode', {'mode': 'start'});
-          }
-          else{
-            $('#changeButton').html('start');
-            sock.emit('change mode', {'mode': 'stop'});
-          }
-        });
-      });
-    </script>
-    <button id="changeButton">start</button>
+      </script>
+      <button id="changeButton">start</button>
   </body>
 </html>

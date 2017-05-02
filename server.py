@@ -33,7 +33,7 @@ def drawer(data):
     else:
         print('input data: ' + str(data))
         # send webpage
-        emit('draw', {'temp': 10}, broadcast=True)
+        emit('draw', data, broadcast=True)
 
 if __name__ == '__main__':
     socket_io.run(app, debug=True, host='0.0.0.0', port=80)

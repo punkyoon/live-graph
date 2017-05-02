@@ -24,48 +24,58 @@ function drawGraph(data) {
     chart.series[2].addPoint(0, true, shift);
 }
 
-$(document).ready(function(){
-  chart = new Highcharts.Chart({
+function wait(msecs)
+{
+    var start = new Date().getTime();
+    var cur = start;
+    while(cur - start < msecs)
+    {
+        cur = new Date().getTime();
+    }
+}
+
+wait(1000);
+
+chart = new Highcharts.Chart({
     chart: {
-      renderTo: 'data-container',
-      defaultSeriesType: 'spline',
-      events: {load: drawGraph}
+        renderTo: 'data-container',
+        defaultSeriesType: 'spline',
+        events: {load: drawGraph}
     },
     title: {
-      text: 'Live plot'
+        text: 'Live plot'
     },
     xAxis: {
-      type: 'datetime',
-      tickPixelInterval: 150,
-      maxZoom: 20 * 1000
+        type: 'datetime',
+        tickPixelInterval: 150,
+        maxZoom: 20*1000
     },
-    yAxis {
-      minPadding: 0.2,
-      maxPadding: 0.2,
-      title: {
-        text: 'value',
-        margin: 80
-      }
+    yAxis: {
+        minPadding: 0.2,
+        maxPadding: 0.2,
+        title: {
+            text: 'value',
+            margin: 80
+        }
     },
     series: [
-      {
-        name: 'fast walk',
-        data: [],
-        dashStyle: 'LongDash',
-        color: Highcharts.getOptions().colors[8]
-      },
-      {
-        name: 'walk',
-        data: [],
-        dashStyle: 'LongDash',
-        color: Highcharts.getOptions().colors[1]
-      },
-      {
-        name: 'rest',
-        data: [],
-        dashStyle: 'LongDash',
-        color: Highcharts.getOptions().colors[0]
-      }
+        {
+            name: 'fast walk',
+            data: [],
+            dashStyle: 'LongDash',
+            color: Highcharts.getOptions().colors[1]
+        },
+        {
+            name: 'walk',
+            data: [],
+            dashStyle: 'LongDash',
+            color: Highcharts.getOptions().colors[0]
+        },
+        {
+            name: 'rest',
+            data: [],
+            dashStyle: 'LongDash',
+            color: Highcharts.getOptions().colors[0]
+        }
     ]
-  });
 });

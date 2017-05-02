@@ -32,17 +32,28 @@
       </div>
     </div>
     
+    <button id="changeButton">start</button>
+
+    <div class="container-fluid">
+      <!-- Example row of columns -->
+      <div class="row">
+        <div class="container-fluid" id="data-container">
+          
     <script src="/static/js/charts.js"></script>
     <script type="text/javascript">
       $(document).ready(function(){
         var sock = io.connect('http://13.78.90.3:80');
+        
         sock.on('connect', function(){
           var connect_string = 'new_connect';
           sock.send(connect_string);
         });
-          sock.on('draw', function(msg){
+
+        sock.on('draw', function(msg){
           console.log(msg);
+          drawGraph(msg);
         });
+        
         $('#changeButton').on('click', function(){
           if($('#changeButton').html() == 'start'){
             $('#changeButton').html('stop');
@@ -55,14 +66,7 @@
         });
       });
     </script>
-  
-    <button id="changeButton">start</button>
-
-    <div class="container-fluid">
-      <!-- Example row of columns -->
-      <div class="row">
-
-          <div class="container-fluid" id="data-container"></div>
+        </div>
 
         </div>
     </div>

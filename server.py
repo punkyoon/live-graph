@@ -18,6 +18,7 @@ def draw():
 # Changing Mode
 @socket_io.on('change mode')
 def changer(data):
+    global _mode
     if data['mode'] == 'start':
         _mode = 'start'
     else:
@@ -26,7 +27,8 @@ def changer(data):
 # Receiving Messages
 @socket_io.on('my event')
 def drawer(data):
-    if self._mode != 'start':
+    global _mode
+    if _mode == 'stop':
         pass
     else:
         print('input data: ' + str(data))

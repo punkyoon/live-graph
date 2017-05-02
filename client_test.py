@@ -1,4 +1,4 @@
-#import time
+import time
 from socketIO_client import SocketIO, LoggingNamespace
 
 '''
@@ -27,4 +27,4 @@ while True:
 
         # sending data set
         socketIO.emit('my event', data)
-        #time.sleep(5)
+        time.sleep(5)

@@ -1,0 +1,36 @@
+<!DOCTYPE>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Live Plot</title>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js"></script>
+  </head>
+  <body>
+    <script type="text/javascript">
+      $(document).ready(function(){
+        var sock = io.connect('http://13.78.90.3:80');
+        sock.on('connect', function(){
+          var connect_string = 'new_connect';
+          sock.send(connect_string);
+        });
+
+        sock.on('draw', function(msg){
+          console.log(msg);
+        });
+
+        $('#changeButton').on('click', function(){
+          if($('#changeButton').html() == 'start'){
+            $('#changeButton').html('stop');
+            sock.emit('change mode', {'mode': 'start'});
+          }
+          else{
+            $('#changeButton').html('start');
+            sock.emit('change mode', {'mode': 'stop'});
+          }
+        });
+      });
+    </script>
+    <button id="changeButton">start</button>
+  </body>
+</html>

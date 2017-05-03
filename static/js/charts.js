@@ -108,3 +108,19 @@ $(function() {
     updateChart(data, chart, options);
 });
 */
+
+//document.getElementById("ResetButton").onclick = function () { alert('hello!'); };
+
+function reset(){
+    data = google.visualization.arrayToDataTable([
+        ['Time', 'Rest', 'Walk', 'Fast Walk'],
+        ['0', 0, 0, 0],
+    ]);
+
+    options = {
+        title: 'Live sensor data',
+        "curveType": "function",
+    };
+
+    chart = drawChart(data, options);
+}

@@ -1,4 +1,5 @@
 import time
+from random import randrange
 from socketIO_client import SocketIO, LoggingNamespace
 
 '''
@@ -14,17 +15,18 @@ sending data format:
 '''
 
 while True:
-    with SocketIO('13.78.90.3', 80, LoggingNamespace) as socketIO:
+    #with SocketIO('13.78.90.3', 80, LoggingNamespace) as socketIO:
+    with SocketIO('localhost', 8000, LoggingNamespace) as socketIO:
         # test data set
         data = {
-            'e': 50,
-            'walk': 20,
-            'fast_walk': 30,
-            'walk_time': 20,
-            'fast_walk_time': 40,
-            'rest_time': 10,
+            'e': randrange(10),
+            'walk': randrange(50),
+            'fast_walk': randrange(50),
+            'walk_time': randrange(50),
+            'fast_walk_time': randrange(50),
+            'rest_time': randrange(50),
         }
 
         # sending data set
         socketIO.emit('my event', data)
-        time.sleep(5)
+        time.sleep(1)

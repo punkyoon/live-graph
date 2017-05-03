@@ -4,21 +4,20 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Live Plot Service</title>
+    <title>Live Graph Service</title>
 
     <!-- Bootstrap -->
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js"></script>
-    <script src="http://code.highcharts.com/highcharts.js"></script>
-    <script src="http://code.highcharts.com/highcharts-more.js"></script>
-    <script src="http://code.highcharts.com/modules/exporting.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
   </head>
   <body>
     <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
       <div class="container-fluid">
         <div class="navbar-header">
-          <a class="navbar-brand" href="/">Live Plot</a>
+          <a class="navbar-brand" href="/">Live Graph</a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
       </div>
@@ -28,7 +27,7 @@
     <div class="jumbotron">
       <div class="container-fluid">
         <br/>
-        <p>Live data plotting using Flask and Highcharts.</p>
+        <p>Live data plotting for sensor</p>
       </div>
     </div>
     
@@ -42,16 +41,22 @@
     <script src="/static/js/charts.js"></script>
     <script type="text/javascript">
       $(document).ready(function(){
-        var sock = io.connect('http://13.78.90.3:80');
+        var sock = io.connect('http://localhost:8000');
+        //var sock = io.connect('http://13.78.90.3:80');
         
         sock.on('connect', function(){
           var connect_string = 'new_connect';
           sock.send(connect_string);
         });
 
-        sock.on('draw', function(msg){
-          console.log(msg);
-          drawGraph(msg);
+        sock.on('draw', function(data){
+          if($('#changeButton').html() == 'stop'){
+            rest = data['rest_time'];
+            walk = data['walk_time'];
+            fast_walk = data['fast_walk_time'];
+
+            updateChart(rest, walk, fast_walk);
+          }
         });
         
         $('#changeButton').on('click', function(){
@@ -71,9 +76,6 @@
         </div>
     </div>
     <hr>
-    <footer>
-      <p>2017</p>
-    </footer>
     </div> <!-- /container -->
   </body>
 </html>

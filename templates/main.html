@@ -55,7 +55,10 @@
             walk = data['walk_time'];
             fast_walk = data['fast_walk_time'];
 
+            e = data['e']
+
             updateChart(rest, walk, fast_walk);
+            $('#inputGroup').val(e);
           }
         });
         
@@ -77,5 +80,13 @@
     </div>
     <hr>
     </div> <!-- /container -->
+
+    <!--<div class="form-group has-success has-feedback">-->
+    <div class="form-group has-success has-feedback">
+      <div class="input-group">
+        <span class="input-group-addon">value E</span>
+        <input type="text" class="form-control" id="inputGroup" value="None" readonly/>
+      </div>
+    </div>
   </body>
 </html>

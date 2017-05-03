@@ -2,7 +2,11 @@
 google.load("visualization", "1", {packages:["corechart"]});
 
 
+//for rest, walk, fast_walk data
 var data, options, chart;
+
+//for Energy(E) data
+var data2, options2, chart2;
 
 var i = 0;
 //var rest=0, walk=0, fast_walk=0;

@@ -18,6 +18,13 @@ function drawChart(data, options) {
     return(chart);
 }
 
+function drawChart2(data, options) {
+    var chart = new google.visualization.LineChart(document.getElementById('data-container2'));
+    chart.draw(data, options);
+    return(chart);
+}
+
+
 /*
 function updateValue() {
     rest = Math.round((Math.random() * 1000));
@@ -54,11 +61,20 @@ function updateChart(rest, walk, fast_walk) {
         rest,
         walk,
         fast_walk
-    ])
+    ]);
 
     chart.draw(data, options);
     
     //setTimeout(function(){updateChart(data, chart, options)}, 5000);
+}
+
+function updateChart2(e) {
+    data2.addRow([
+        ""+i,
+        e
+    ]);
+
+    chart2.draw(data2, options2);
 }
 
 $(function() {
@@ -73,6 +89,11 @@ $(function() {
         ['Time', 'Rest', 'Walk', 'Fast Walk'],
         ['0', 0, 0, 0],
     ]);
+
+    data2 = google.visualization.arrayToDataTable([
+        ['Time', 'E'],
+        ['0', 0],
+    ]);
     
     /*
     var options = {
@@ -84,10 +105,15 @@ $(function() {
         title: 'Live sensor data',
         "curveType": "function",
     };
+
+    options2 = {
+        title: 'Energy data',
+        "curveType": "function",
+    };
     
     //var chart = drawChart(data, options);
     chart = drawChart(data, options);
-    
+    chart2 = drawChart2(data2, options2);
     //updateChart(data, chart, options);
 });
 
@@ -126,5 +152,17 @@ function reset(){
         "curveType": "function",
     };
 
+    options2 = {
+        title: 'Energy data',
+        "curveType": "function",
+    };
+
+    data2 = google.visualization.arrayToDataTable([
+        ['Time', 'E'],
+        ['0', 0],
+    ]);
+
+    i = 0;
     chart = drawChart(data, options);
+    chart2 = drawChart2(data2, options2);
 }

@@ -37,13 +37,14 @@
     <div class="container-fluid">
       <!-- Example row of columns -->
       <div class="row">
-        <div class="container-fluid" id="data-container">
+        <div class="container-fluid" id="data-container"></div>
+        <div class="container-fluid" id="data-container2"></div>
           
     <script src="/static/js/charts.js"></script>
     <script type="text/javascript">
       $(document).ready(function(){
-        var sock = io.connect('http://localhost:8000');
-        //var sock = io.connect('http://13.78.90.3:80');
+        //var sock = io.connect('http://localhost:8000');
+        var sock = io.connect('http://13.78.90.3:80');
         
         sock.on('connect', function(){
           var connect_string = 'new_connect';
@@ -59,7 +60,8 @@
             e = data['e']
 
             updateChart(rest, walk, fast_walk);
-            $('#inputGroup').val(e);
+            updateChart2(e);
+            //$('#inputGroup').val(e);
           }
         });
         
@@ -75,18 +77,12 @@
         });
       });
     </script>
-        </div>
 
         </div>
     </div>
     <hr>
     </div> <!-- /container -->
 
-    <!--<div class="form-group has-success has-feedback">-->
-    <div class="form-group has-success has-feedback">
-      <div class="input-group">
-        <span class="input-group-addon">value E</span>
-        <input type="text" class="form-control" id="inputGroup" value="None" readonly/>
       </div>
     </div>
   </body>

@@ -31,7 +31,7 @@ $ make start
 #### Installing packages
 
 ```bash
-$ sudo pip install -r requirements
+$ sudo pip install -r requirements.txt
 ```
 
 #### Running server

@@ -1,60 +1,31 @@
-// google.charts.load("visualization", "1", {packages:["corechart"]});
+// load google charts library
 google.load("visualization", "1", {packages:["corechart"]});
 
-
-//for rest, walk, fast_walk data
+// for rest, walk, fast_walk data
 var data, options, chart;
 
-//for Energy(E) data
+// for energy(E) data
 var data2, options2, chart2;
 
 var i = 0;
-//var rest=0, walk=0, fast_walk=0;
 
-/* initialize chart */
+/* initialize chart1 - rest, walk, fast_walk data */
 function drawChart(data, options) {
     var chart = new google.visualization.LineChart(document.getElementById('data-container'));
     chart.draw(data, options);
     return(chart);
 }
 
+/* initialize chart2 - energy(e) data */
 function drawChart2(data, options) {
     var chart = new google.visualization.LineChart(document.getElementById('data-container2'));
     chart.draw(data, options);
     return(chart);
 }
 
-
-/*
-function updateValue() {
-    rest = Math.round((Math.random() * 1000));
-    walk = Math.round((Math.random() * 1000));
-    fast_walk = Math.round((Math.random() * 1000));
-
-    updateChart(rest, walk, fast_walk);
-}
-*/
-
-/* update the chart */
-//function updateChart(data, chart, options) {
-//function updateChart(a, b, c) {
+/* update the chart1 - rest, walk, fast_walk data */
 function updateChart(rest, walk, fast_walk) {
     i = (i + 1);
-    
-    /*
-    rest = data['rest'];
-    walk = data['walk'];
-    fast_walk = data['fast_walk'];
-    */
-
-    /*
-    data.addRow([
-        ""+i, // change the number to a string
-        Math.round((Math.random() * 1000)), //random value 
-        Math.round((Math.random() * 1000)), //random value
-        Math.round((Math.random() * 1000)) //random value
-    ]);
-    */
 
     data.addRow([
         ""+i,
@@ -64,10 +35,9 @@ function updateChart(rest, walk, fast_walk) {
     ]);
 
     chart.draw(data, options);
-    
-    //setTimeout(function(){updateChart(data, chart, options)}, 5000);
 }
 
+/* update the chart2 - energy(e) data */
 function updateChart2(e) {
     data2.addRow([
         ""+i,
@@ -78,13 +48,6 @@ function updateChart2(e) {
 }
 
 $(function() {
-   // set variables
-    /*
-    var data = google.visualization.arrayToDataTable([
-        ['Time', 'Rest', 'Walk', 'Fast Walk'],
-        ['0', 0, 0, 0],
-    ]);
-    */
     data = google.visualization.arrayToDataTable([
         ['Time', 'Rest', 'Walk', 'Fast Walk'],
         ['0', 0, 0, 0],
@@ -95,12 +58,6 @@ $(function() {
         ['0', 0],
     ]);
     
-    /*
-    var options = {
-        title: 'Live sensor data',
-        "curveType": "function",
-    };
-    */
     options = {
         title: 'Live sensor data',
         "curveType": "function",
@@ -110,41 +67,24 @@ $(function() {
         title: 'Energy data',
         "curveType": "function",
     };
-    
-    //var chart = drawChart(data, options);
+
     chart = drawChart(data, options);
     chart2 = drawChart2(data2, options2);
-    //updateChart(data, chart, options);
 });
 
-/*
-$(function() {
-   // set variables
-    var data = google.visualization.arrayToDataTable([
-        ['Year', 'Sales', 'Expenses'],
-        ['2004',  1000,      400],
-        ['2005',  1170,      460],
-        ['2006',  660,       1120],
-        ['2007',  1030,      540]
-    ]);
-    
-    var options = {
-        title: 'Company Performance',
-        "curveType": "function",
-    };
-    
-    var chart = drawChart(data, options);
-    
-    updateChart(data, chart, options);
-});
-*/
 
-//document.getElementById("ResetButton").onclick = function () { alert('hello!'); };
-
+/* reset charts */
 function reset(){
+    i = 0;
+    
     data = google.visualization.arrayToDataTable([
         ['Time', 'Rest', 'Walk', 'Fast Walk'],
         ['0', 0, 0, 0],
+    ]);
+
+    data2 = google.visualization.arrayToDataTable([
+        ['Time', 'E'],
+        ['0', 0],
     ]);
 
     options = {
@@ -157,12 +97,6 @@ function reset(){
         "curveType": "function",
     };
 
-    data2 = google.visualization.arrayToDataTable([
-        ['Time', 'E'],
-        ['0', 0],
-    ]);
-
-    i = 0;
     chart = drawChart(data, options);
     chart2 = drawChart2(data2, options2);
 }

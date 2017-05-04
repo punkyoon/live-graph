@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Live Graph Service</title>
 
-    <!-- Bootstrap -->
+    <!-- Bootstrap and libraries -->
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js"></script>
@@ -17,72 +17,64 @@
     <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
       <div class="container-fluid">
         <div class="navbar-header">
-          <a class="navbar-brand" href="/">Live Graph</a>
+          <a class="navbar-brand" href="/" style="color: white">Live Graph Service</a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
       </div>
     </div>
 
-    <!-- Main jumbotron for a primary marketing message or call to action -->
-    <div class="jumbotron">
-      <div class="container-fluid">
-        <br/>
-        <p>Live data plotting for sensor</p>
-      </div>
+    <!-- padding -->
+    <div style="height: 90px"></div>
+
+    <!-- buttons -->
+    <div class="btn-group" role="group" style="padding-left: 15px">
+      <button class="btn btn-default btn-lg" id="changeButton">start</button>
+      <button class="btn btn-default btn-lg" id="resetButton" onclick="reset()">reset</button>
     </div>
-    
-    <button id="changeButton">start</button>
-    <button id="resetButton" onclick="reset()">reset</button>
 
     <div class="container-fluid">
       <!-- Example row of columns -->
       <div class="row">
+        <!-- chart1 - rest, walk, fast_walk -->
         <div class="container-fluid" id="data-container"></div>
+        <!-- chart2 - energy(e) -->
         <div class="container-fluid" id="data-container2"></div>
-          
-    <script src="/static/js/charts.js"></script>
-    <script type="text/javascript">
-      $(document).ready(function(){
-        //var sock = io.connect('http://localhost:8000');
-        var sock = io.connect('http://13.78.90.3:80');
-        
-        sock.on('connect', function(){
-          var connect_string = 'new_connect';
-          sock.send(connect_string);
-        });
+        <!-- websocket code -->
+        <script src="/static/js/charts.js"></script>
+        <script type="text/javascript">
+          $(document).ready(function(){
+            var sock = io.connect('http://localhost:8000');
+            //var sock = io.connect('http://13.78.90.3:80');
 
-        sock.on('draw', function(data){
-          if($('#changeButton').html() == 'stop'){
-            rest = data['rest_time'];
-            walk = data['walk_time'];
-            fast_walk = data['fast_walk_time'];
+            sock.on('draw', function(data){
+              if($('#changeButton').html() == 'stop'){
+                // get data
+                rest = data['rest_time'];
+                walk = data['walk_time'];
+                fast_walk = data['fast_walk_time'];
+                e = data['e'];
+                
+                // updating chart (live)
+                updateChart(rest, walk, fast_walk);
+                updateChart2(e);
+              }
+            });
 
-            e = data['e']
-
-            updateChart(rest, walk, fast_walk);
-            updateChart2(e);
-            //$('#inputGroup').val(e);
-          }
-        });
-        
-        $('#changeButton').on('click', function(){
-          if($('#changeButton').html() == 'start'){
-            $('#changeButton').html('stop');
-            sock.emit('change mode', {'mode': 'start'});
-          }
-          else{
-            $('#changeButton').html('start');
-            sock.emit('change mode', {'mode': 'stop'});
-          }
-        });
-      });
-    </script>
-
-        </div>
-    </div>
-    <hr>
-    </div> <!-- /container -->
-
+            // change mode
+            $('#changeButton').on('click', function(){
+              // change mode: stop -> start
+              if($('#changeButton').html() == 'start'){
+                $('#changeButton').html('stop');
+                sock.emit('change mode', {'mode': 'start'});
+              }
+              // change mode: start -> stop
+              else{
+                $('#changeButton').html('start');
+                sock.emit('change mode', {'mode': 'stop'});
+              }
+            });
+          });
+        </script>
       </div>
     </div>
   </body>

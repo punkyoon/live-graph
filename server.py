@@ -9,7 +9,6 @@ socket_io = SocketIO(app)
 
 # _mode = 'start' or 'stop'
 _mode = 'stop'
-#_sensitive = 0.3
 
 @app.route('/')
 def draw():
@@ -32,7 +31,7 @@ def drawer(data):
         pass
     else:
         print('input data: ' + str(data))
-        # send webpage
+        # send to webpage
         emit('draw', data, broadcast=True)
 
 if __name__ == '__main__':

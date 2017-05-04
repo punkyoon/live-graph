@@ -18,7 +18,7 @@ while True:
     #with SocketIO('13.78.90.3', 80, LoggingNamespace) as socketIO:
     with SocketIO('localhost', 8000, LoggingNamespace) as socketIO:
         # test data set
-        data = {
+        send_data = {
             'e': randrange(10),
             'walk': randrange(50),
             'fast_walk': randrange(50),
@@ -28,5 +28,5 @@ while True:
         }
 
         # sending data set
-        socketIO.emit('my event', data)
+        socketIO.emit('my event', send_data)
         #time.sleep(0.5)

@@ -29,4 +29,4 @@ while True:
 
         # sending data set
         socketIO.emit('my event', data)
-        time.sleep(0.5)
+        #time.sleep(0.5)

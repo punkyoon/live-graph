@@ -15,7 +15,6 @@ sending data format:
 '''
 
 while True:
-    #with SocketIO('13.78.90.3', 80, LoggingNamespace) as socketIO:
     with SocketIO('localhost', 8000, LoggingNamespace) as socketIO:
         # test data set
         send_data = {

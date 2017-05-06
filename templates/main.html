@@ -44,7 +44,6 @@
         <script type="text/javascript">
           $(document).ready(function(){
             var sock = io.connect('http://localhost:8000');
-            //var sock = io.connect('http://13.78.90.3:80');
 
             sock.on('draw', function(data){
               if($('#changeButton').html() == 'stop'){

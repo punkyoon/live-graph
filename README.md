@@ -12,20 +12,6 @@ live sensor graph with Flask+SocketIO
 
 ## Usage in Linux
 
-### Python 2.7
-
-#### Installing packages
-
-```bash
-$ make
-```
-
-#### Running server
-
-```bash
-$ make start
-```
-
 ### Python 3.x
 
 #### Installing packages

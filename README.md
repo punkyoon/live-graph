@@ -1,6 +1,6 @@
 # live-graph
 
-live sensor graph with Flask+SocketIO
+Simple live sensor graph with Flask and SocketIO
 
 ## Getting Started
 

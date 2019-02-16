@@ -2,26 +2,24 @@
 
 live sensor graph with Flask+SocketIO
 
-## Support
+## Getting Started
 
-- Windows
-
-- MacOS X
-
-- Linux
-
-## Usage in Linux
-
-### Python 3.x
-
-#### Installing packages
+### Install Python pacakages
 
 ```bash
-$ sudo pip install -r requirements.txt
+$ pip install -r requirements.txt
 ```
 
-#### Running server
+### Run server
 
 ```bash
 $ python server.py
+```
+
+Open `localhost:8000` and click the **start** button
+
+#### Try it out
+
+```bash
+$ python client_test.py
 ```

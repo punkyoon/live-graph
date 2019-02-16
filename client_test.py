@@ -3,7 +3,7 @@ from random import randrange
 from socketIO_client import SocketIO, LoggingNamespace
 
 '''
-sending data format:
+Sending data format:
     data= {
         'e': value,
         'walk': value,
@@ -14,18 +14,19 @@ sending data format:
     }
 '''
 
-while True:
+if __name__ == '__main__':
     with SocketIO('localhost', 8000, LoggingNamespace) as socketIO:
-        # test data set
-        send_data = {
-            'e': randrange(10),
-            'walk': randrange(50),
-            'fast_walk': randrange(50),
-            'walk_time': randrange(50),
-            'fast_walk_time': randrange(50),
-            'rest_time': randrange(50),
-        }
+        while True:
+            # Data for testing
+            send_data = {
+                'e': randrange(10),
+                'walk': randrange(50),
+                'fast_walk': randrange(50),
+                'walk_time': randrange(50),
+                'fast_walk_time': randrange(50),
+                'rest_time': randrange(50),
+            }
 
-        # sending data set
-        socketIO.emit('my event', send_data)
-        #time.sleep(0.5)
+            # Send
+            socketIO.emit('my event', send_data)
+            time.sleep(0.5)

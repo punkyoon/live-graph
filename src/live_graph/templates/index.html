@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>live-graph</title>
+
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="/static/css/index.css" />
+    </head>
+    <body>
+        <nav class="nav">
+            <div class="container nav-row">
+                <a href="/" class="wordmark">live-graph</a>
+            </div>
+        </nav>
+
+        <main class="container content">
+            <section>
+                <h2 class="section-label">[+] Subscribe to a channel</h2>
+                <div class="toolbar">
+                    <label class="channel-input" for="channelInput">
+                        <span class="prefix">channel ▸</span>
+                        <input
+                            id="channelInput"
+                            type="text"
+                            placeholder="office-1"
+                            autocomplete="off"
+                            spellcheck="false"
+                        />
+                    </label>
+                    <button class="btn" id="subscribeBtn" type="button">
+                        Subscribe
+                    </button>
+                    <button class="btn secondary" id="resetBtn" type="button">
+                        Reset charts
+                    </button>
+                </div>
+                <div id="status" class="status">not subscribed</div>
+            </section>
+
+            <section>
+                <h2 class="section-label">[+] Live charts</h2>
+                <div class="charts-grid">
+                    <div class="chart-tile">
+                        <div class="label">activity</div>
+                        <div class="chart-wrapper">
+                            <canvas id="data-container"></canvas>
+                        </div>
+                        <div class="caption">
+                            Fig 1. rest / walk / fast_walk over time
+                        </div>
+                    </div>
+                    <div class="chart-tile">
+                        <div class="label">energy</div>
+                        <div class="chart-wrapper">
+                            <canvas id="data-container2"></canvas>
+                        </div>
+                        <div class="caption">Fig 2. e over time</div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <script
+            src="https://cdn.jsdelivr.net/npm/chart.js@4.5.1/dist/chart.umd.min.js"
+            integrity="sha384-jb8JQMbMoBUzgWatfe6COACi2ljcDdZQ2OxczGA3bGNeWe+6DChMTBJemed7ZnvJ"
+            crossorigin="anonymous"
+        ></script>
+        <script
+            src="https://cdn.socket.io/4.8.3/socket.io.min.js"
+            integrity="sha384-kzavj5fiMwLKzzD1f8S7TeoVIEi7uKHvbTA3ueZkrzYq75pNQUiUi6Dy98Q3fxb0"
+            crossorigin="anonymous"
+        ></script>
+        <script src="/static/js/charts.js"></script>
+        <script src="/static/js/app.js"></script>
+    </body>
+</html>

@@ -1,5 +1,0 @@
-Flask
-flask-socketio
-gevent
-eventlet
-socketIO-client

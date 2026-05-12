@@ -1,0 +1,44 @@
+[project]
+name = "live-graph"
+version = "2.0.0"
+description = "Super-simple live sensor graph build on FastAPI, Socket.IO and Chart.js"
+readme = "README.md"
+requires-python = ">=3.14,<3.15"
+dependencies = [
+    "fastapi>=0.118",
+    "python-socketio>=5.11",
+    "uvicorn[standard]>=0.32",
+    "jinja2>=3.1",
+    "aiohttp>=3.10",
+]
+
+[project.scripts]
+live-graph = "live_graph.server:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/live_graph"]
+
+[dependency-groups]
+dev = [
+    "ruff>=0.7",
+    "basedpyright>=1.39",
+]
+
+[tool.ruff]
+line-length = 120
+target-version = "py314"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+
+[tool.basedpyright]
+pythonVersion = "3.14"
+typeCheckingMode = "standard"
+include = ["src", "samples"]
+venvPath = "."
+venv = ".venv"
+reportMissingTypeStubs = false

@@ -2,6 +2,8 @@
 
 Super-simple live sensor graph built on **FaseAPI**, **Socket.IO** and **Chart.js**.
 
+<img width="1266" height="728" alt="Screenshot 2026-05-12 at 7 27 44 PM" src="https://github.com/user-attachments/assets/a8f3e51a-0886-4ec8-8958-f4c619081473" />
+
 ## Requirements
 
 - Python 3.14+
